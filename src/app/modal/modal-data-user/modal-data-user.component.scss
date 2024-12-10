@@ -1,0 +1,91 @@
+.modal-data {
+        position: absolute;
+        background-color: #5050506c;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        display: flex;
+
+        .title-form {
+                font-size: 20px;
+                font-weight: bold;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+        }
+
+        .content {
+                background-color: #fff;
+                margin: auto;
+                min-width: 250px;
+                width: 50%;
+                border: none;
+                padding: 30px 15px 10px 15px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px 0px #0000004d;
+
+                form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 3px;
+
+                        label {
+                                font-weight: bold;
+                                margin: 8px 0;
+                                font-size: 13px;
+                        }
+
+                        input[type="text"],
+                        select {
+                                border: none;
+                                padding: 10px 5px;
+                                background-color: #e7e7e7b9;
+                                border-radius: 3px;
+                                line-height: 15px;
+                                font-size: 12px;
+
+                                &:focus {
+                                        outline: 2px #6199ff solid;
+                                }
+
+                                &::placeholder,
+                                option {
+                                        font-size: 12px;
+                                }
+                        }
+
+                        select {
+                                font-size: 11px;
+                        }
+
+                        input[type="submit"],
+                        button {
+                                border: none;
+                                padding: 10px 0;
+                                transition: .2s;
+                                cursor: pointer;
+                                margin: 20px 0;
+                                width: 100px;
+
+                                &:hover {
+                                        background: #6199ff;
+                                }
+                        }
+
+                        .options {
+                                display: flex;
+                                justify-content: center;
+                                gap: 30px;
+                        }
+
+                        .btn-salida {
+                                background-color: #ff1313;
+
+                                &:hover {
+                                        background: opacify($color: #ff7171, $amount: 0);
+                                }
+                        }
+                }
+        }
+
+}

@@ -1,0 +1,51 @@
+<section class="modal-data">
+    <div class="content">
+        <label class="title-form">{{title}}</label>
+        <form [formGroup]="profileForm" (ngSubmit)="enviarDatos()">
+            <label for="frm-nombres">Nombres:</label>
+            <input type="text" formControlName="nombres" id="frm-nombres" placeholder="Escribe los nombres">
+
+            <label for="frm-apellido1">Primer Apellido:</label>
+            <input type="text" formControlName="primerApellido" id="frm-nombres"
+                placeholder="Escribe el primer apellido">
+
+            <label for="frm-apellido2">Segundo Apellido:</label>
+            <input type="text" formControlName="segundoApellido" id="frm-nombres"
+                placeholder="Escribe el segundo Apellido">
+
+            <label for=" frm-pais">País:</label>
+            <select formControlName="pais" id="frm-pais">
+                <option value="">Escoje un País</option>
+                <option value="USA">Usa</option>
+                <option value="COLOMBIA">Colombia</option>
+            </select>
+
+            <label for=" frm-identificacion">Tipo de Identificación:</label>
+            <select formControlName="identificacion" id="frm-identificacion">
+                <option value="">Escoje una Identificación</option>
+                <option value="CEDULA_DE_CIUDADANIA">cedula de ciudadania</option>
+                <option value="CEDULA_EXTRANJERA">cedula extranjera</option>
+                <option value="PASAPORTE">pasaporte</option>
+                <option value="PERMISO_ESPECIAL">permiso especial</option>
+            </select>
+
+            <label for="frm-numeroIdentificación">Número de Identificación:</label>
+            <input type="text" formControlName="numeroIdentificacion" id="frm-numeroIdentificación"
+                placeholder="Escribe numero de identificación máximo 20 cáracteres">
+            @if (!create) {
+            <label for="frm-dominio">Dominio:</label>
+            <select formControlName="dominio" id="frm-dominio">
+                <option value="">Escoje un Dominio</option>
+                <option value="USA">global.com.us</option>
+                <option value="COLOMBIA">global.com.co</option>
+            </select>
+            }
+            <div class="options">
+                <input type="submit" value="Enviar Datos" [disabled]="!profileForm.valid">
+                <button class="btn-salida" type="button" (click)="salir()">Volver</button>
+            </div>
+
+        </form>
+
+    </div>
+</section>

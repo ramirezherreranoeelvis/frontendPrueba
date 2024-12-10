@@ -1,0 +1,52 @@
+<section id="app-empleados">
+    <table class="list-empleados">
+        <caption>Empleados</caption>
+        <thead>
+            <tr>
+                <th>Número de Identificación</th>
+                <th>Nombres</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>País</th>
+                <th>Tipo de Identificación</th>
+                <th>Dominio</th>
+                <th colspan="3">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (empleado of empleadosMostrar.empleados; track $index) {
+            <tr>
+                <td>{{empleado.numeroIdentificacion}}</td>
+                <td>{{empleado.nombres}}</td>
+                <td>{{empleado.primerApellido}}</td>
+                <td>{{empleado.segundoApellido}}</td>
+                <td>{{empleado.pais}}</td>
+                <td>{{empleado.identificacion}}</td>
+                <td>{{empleado.dominio}}</td>
+                <td class="empleado-option"><button class="btn-update"
+                        (click)="update('Actualizar Usuario',false, empleado)">Actualizar</button>
+                </td>
+                <td class="empleado-option">
+                    <button class="btn-ingreso" (click)="registrarIngreso(empleado)">Registrar Ingreso</button>
+                </td>
+                <td class="empleado-option">
+                    <button class="btn-salida" (click)="registrarSalida(empleado)">Registrar Salida</button>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+    <div class="options">
+        <button class="btn-previous" (click)="btnAnterior()">Anterior</button>
+        <button class="btn-next" (click)="btnSiguiente()">Siguiente</button>
+    </div>
+    <button id="btn-nuevo-empleado" (click)="viewDialog('Nuevo Usuario', true)">Nuevo Empleado</button>
+    @if (activeModalDataUser) {
+    <app-modal-data-user [title]="title" [create]="isCreate" [nombres]="nombres?nombres:''"
+        [apellidoPrimero]="apellidoPrimero?apellidoPrimero:''" [apellidoSegundo]="apellidoSegundo?apellidoSegundo:''"
+        [numeroIdentificacion]="numeroIdentificacion?numeroIdentificacion:''" (active)="cerrarModal($event)"
+        (finalizado)="actualizarTabla()" (result)="(addNewEmpleado($event))" />
+    }
+
+</section>
