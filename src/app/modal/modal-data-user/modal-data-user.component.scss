@@ -1,5 +1,6 @@
 .modal-data {
-        position: absolute;
+        position: fixed;
+        left: 0;
         background-color: #5050506c;
         width: 100vw;
         height: 100vh;
@@ -82,7 +83,7 @@
                                 background-color: #ff1313;
 
                                 &:hover {
-                                        background: opacify($color: #ff7171, $amount: 0);
+                                        background: #ff7171;
                                 }
                         }
                 }

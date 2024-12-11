@@ -3,34 +3,38 @@
         <caption>Empleados</caption>
         <thead>
             <tr>
+                <th>N°</th>
                 <th>Número de Identificación</th>
                 <th>Nombres</th>
                 <th>Primer Apellido</th>
                 <th>Segundo Apellido</th>
+                <th>Email</th>
                 <th>País</th>
                 <th>Tipo de Identificación</th>
                 <th>Dominio</th>
-                <th colspan="3">Opciones</th>
+                <th class="empleado-option">Opciones</th>
             </tr>
         </thead>
         <tbody>
             @for (empleado of empleadosMostrar.empleados; track $index) {
             <tr>
+                <td>{{empleadosMostrar.inicio + 1 + $index}}</td>
                 <td>{{empleado.numeroIdentificacion}}</td>
                 <td>{{empleado.nombres}}</td>
                 <td>{{empleado.primerApellido}}</td>
                 <td>{{empleado.segundoApellido}}</td>
+                <td>{{empleado.correo}}</td>
                 <td>{{empleado.pais}}</td>
                 <td>{{empleado.identificacion}}</td>
                 <td>{{empleado.dominio}}</td>
-                <td class="empleado-option"><button class="btn-update"
-                        (click)="update('Actualizar Usuario',false, empleado)">Actualizar</button>
-                </td>
                 <td class="empleado-option">
-                    <button class="btn-ingreso" (click)="registrarIngreso(empleado)">Registrar Ingreso</button>
-                </td>
-                <td class="empleado-option">
-                    <button class="btn-salida" (click)="registrarSalida(empleado)">Registrar Salida</button>
+                    <div class="empleado-options">
+                        <button class="btn-update"
+                            (click)="update('Actualizar Usuario',false, empleado)">Actualizar</button>
+                        <button class="btn-ingreso" (click)="registrarIngreso(empleado)">Registrar Ingreso</button>
+                        <button class="btn-salida" (click)="registrarSalida(empleado)">Registrar Salida</button>
+
+                    </div>
                 </td>
             </tr>
             }
@@ -38,8 +42,10 @@
         </tbody>
     </table>
     <div class="options">
-        <button class="btn-previous" (click)="btnAnterior()">Anterior</button>
-        <button class="btn-next" (click)="btnSiguiente()">Siguiente</button>
+        <button class="btn-previous" (click)="btnAnterior()"
+            [disabled]="empleadosMostrar.inicio === 0">Anterior</button>
+        <button class="btn-next" (click)="btnSiguiente()"
+            [disabled]="empleadosMostrar.fin >= empleados.length">Siguiente</button>
     </div>
     <button id="btn-nuevo-empleado" (click)="viewDialog('Nuevo Usuario', true)">Nuevo Empleado</button>
     @if (activeModalDataUser) {

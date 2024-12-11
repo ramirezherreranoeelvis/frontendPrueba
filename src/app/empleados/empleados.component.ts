@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmpleadosService } from './empleados.service';
 import { Empleado } from '../model/empleado';
 import { ModalDataUserComponent } from '../modal/modal-data-user/modal-data-user.component';
+import { error } from 'node:console';
 
 @Component({
     selector: 'app-empleados',
@@ -23,8 +24,8 @@ export class EmpleadosComponent implements OnInit {
     constructor(private empleadoService: EmpleadosService) { }
 
     ngOnInit(): void {
-        this.empleadoService.obtenerEmpleados().subscribe(
-            (data: Empleado[]) => {
+        this.empleadoService.obtenerEmpleados().subscribe({
+            next: (data: Empleado[]) => {
                 this.empleados = data;
                 if (this.empleados.length <= 10) {
                     this.empleadosMostrar.empleados = data
@@ -35,10 +36,10 @@ export class EmpleadosComponent implements OnInit {
                     this.empleadosMostrar.empleados = this.empleados.slice(inicio, fin)
                 }
             },
-            (error) => {
+            error: error => {
                 console.error('Error fetching students', error);
             }
-        )
+        })
     }
 
     activeModalDataUser = false;
@@ -81,16 +82,16 @@ export class EmpleadosComponent implements OnInit {
     }
 
     actualizarTabla() {
-        this.empleadoService.obtenerEmpleados().subscribe(
-            (data: Empleado[]) => {
+        this.empleadoService.obtenerEmpleados().subscribe({
+            next: (data: Empleado[]) => {
                 this.empleados = data;
                 console.log(data);
 
             },
-            (error) => {
+            error: error => {
                 console.error('Error fetching students', error);
             }
-        )
+        })
 
     }
 
