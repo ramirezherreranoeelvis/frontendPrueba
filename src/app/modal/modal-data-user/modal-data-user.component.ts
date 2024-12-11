@@ -20,6 +20,9 @@ export class ModalDataUserComponent implements OnInit {
         @Input() apellidoPrimero!: string;
         @Input() apellidoSegundo!: string;
         @Input() numeroIdentificacion!: string;
+        @Input() pais!: string;
+        @Input() identificacion!: string;
+        @Input() area!: string;
         @Output() finalizado = new EventEmitter<void>();
         @Output() result = new EventEmitter<Empleado>();
 
@@ -30,37 +33,29 @@ export class ModalDataUserComponent implements OnInit {
                 segundoApellido: new FormControl(''),
                 pais: new FormControl(''),
                 identificacion: new FormControl(''),
-                dominio: new FormControl('')
+                dominio: new FormControl(''),
+                area: new FormControl('')
         })
 
         constructor(private empleadoService: EmpleadosService) { }
 
         ngOnInit(): void {
-                if (this.create) {
-                        this.profileForm.get('nombres')?.setValidators(Validators.required);
-                        this.profileForm.get('primerApellido')?.setValidators(Validators.required);
-                        this.profileForm.get('segundoApellido')?.setValidators(Validators.required);
-                        this.profileForm.get('pais')?.setValidators(Validators.required);
-                        this.profileForm.get('identificacion')?.setValidators(Validators.required);
-                        this.profileForm.get('numeroIdentificacion')?.setValidators(Validators.required);
-                        this.profileForm.get('dominio')?.clearValidators();
-                } else {
-                        this.profileForm.get('nombres')?.clearValidators();
-                        this.profileForm.get('primerApellido')?.clearValidators();
-                        this.profileForm.get('segundoApellido')?.clearValidators();
-                        this.profileForm.get('pais')?.clearValidators();
-                        this.profileForm.get('identificacion')?.clearValidators();
-                        this.profileForm.get('dominio')?.clearValidators();
-
-                        this.profileForm.get('nombres')?.disable();
-                        this.profileForm.get('primerApellido')?.disable();
-                        this.profileForm.get('segundoApellido')?.disable();
-                        this.profileForm.get('numeroIdentificacion')?.disable();
-
+                this.profileForm.get('nombres')?.setValidators(Validators.required);
+                this.profileForm.get('primerApellido')?.setValidators(Validators.required);
+                this.profileForm.get('segundoApellido')?.setValidators(Validators.required);
+                this.profileForm.get('pais')?.setValidators(Validators.required);
+                this.profileForm.get('identificacion')?.setValidators(Validators.required);
+                this.profileForm.get('dominio')?.setValidators(Validators.required);
+                this.profileForm.get('numeroIdentificacion')?.setValidators(Validators.required);
+                this.profileForm.get('area')?.setValidators(Validators.required);
+                if (!this.create) {
                         this.profileForm.get('nombres')?.setValue(this.nombres);
                         this.profileForm.get('primerApellido')?.setValue(this.apellidoPrimero);
                         this.profileForm.get('segundoApellido')?.setValue(this.apellidoSegundo);
                         this.profileForm.get('numeroIdentificacion')?.setValue(this.numeroIdentificacion);
+                        this.profileForm.get('pais')?.setValue(this.pais);
+                        this.profileForm.get('identificacion')?.setValue(this.identificacion);
+                        this.profileForm.get('area')?.setValue(this.area);
                 }
         }
 
@@ -78,6 +73,8 @@ export class ModalDataUserComponent implements OnInit {
                                 segundoApellido: this.profileForm.value.segundoApellido ?? '',
                                 pais: this.profileForm.value.pais ?? '',
                                 identificacion: this.profileForm.value.identificacion ?? '',
+                                dominio: this.profileForm.value.dominio ?? '',
+                                area: this.profileForm.value.area ?? ''
                         } as Empleado;
 
                         this.empleadoService.registrarEmpleado(empleado).subscribe({
@@ -92,10 +89,14 @@ export class ModalDataUserComponent implements OnInit {
                         })
                 } else {
                         var empleado = {
-                                numeroIdentificacion: this.numeroIdentificacion ?? '',
+                                nombres: this.profileForm.value.nombres ?? '',
+                                numeroIdentificacion: this.profileForm.value.numeroIdentificacion ?? '',
+                                primerApellido: this.profileForm.value.primerApellido ?? '',
+                                segundoApellido: this.profileForm.value.segundoApellido ?? '',
                                 pais: this.profileForm.value.pais ?? '',
                                 identificacion: this.profileForm.value.identificacion ?? '',
-                                dominio: this.profileForm.value.dominio ?? ''
+                                dominio: this.profileForm.value.dominio ?? '',
+                                area: this.profileForm.value.area ?? ''
                         } as Empleado;
                         this.empleadoService.actualizarEmpleado(empleado)
                         this.finalizado.emit();

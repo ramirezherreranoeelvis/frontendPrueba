@@ -12,6 +12,7 @@
                 <th>País</th>
                 <th>Tipo de Identificación</th>
                 <th>Dominio</th>
+                <th>Area</th>
                 <th class="empleado-option">Opciones</th>
             </tr>
         </thead>
@@ -27,13 +28,14 @@
                 <td>{{empleado.pais}}</td>
                 <td>{{empleado.identificacion}}</td>
                 <td>{{empleado.dominio}}</td>
+                <td>{{empleado.area}}</td>
                 <td class="empleado-option">
                     <div class="empleado-options">
                         <button class="btn-update"
                             (click)="update('Actualizar Usuario',false, empleado)">Actualizar</button>
                         <button class="btn-ingreso" (click)="registrarIngreso(empleado)">Registrar Ingreso</button>
                         <button class="btn-salida" (click)="registrarSalida(empleado)">Registrar Salida</button>
-
+                        <button class="btn-salida" (click)="eliminarEmpleado(empleado)">Eliminar Empleado</button>
                     </div>
                 </td>
             </tr>
@@ -51,8 +53,13 @@
     @if (activeModalDataUser) {
     <app-modal-data-user [title]="title" [create]="isCreate" [nombres]="nombres?nombres:''"
         [apellidoPrimero]="apellidoPrimero?apellidoPrimero:''" [apellidoSegundo]="apellidoSegundo?apellidoSegundo:''"
-        [numeroIdentificacion]="numeroIdentificacion?numeroIdentificacion:''" (active)="cerrarModal($event)"
+        [numeroIdentificacion]="numeroIdentificacion?numeroIdentificacion:''" [pais]="pais?pais:''"
+        [identificacion]="identificacion?identificacion:''" [area]="area?area:''" (active)="cerrarModal($event)"
         (finalizado)="actualizarTabla()" (result)="(addNewEmpleado($event))" />
+    }
+    @if (activeModalDeleteUser) {
+    <app-modal-delete-user [numeroIdentificacion]="numeroIdentificacion?numeroIdentificacion:''"
+        (finalizado)="cerrarModalDelete($event)" />
     }
 
 </section>

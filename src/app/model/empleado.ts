@@ -7,4 +7,5 @@ export interface Empleado {
         pais: string | null
         identificacion: string | null
         dominio: string | null
+        area: string | null
 }

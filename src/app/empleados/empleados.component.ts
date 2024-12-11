@@ -3,11 +3,12 @@ import { EmpleadosService } from './empleados.service';
 import { Empleado } from '../model/empleado';
 import { ModalDataUserComponent } from '../modal/modal-data-user/modal-data-user.component';
 import { error } from 'node:console';
+import { ModalDeleteUserComponent } from '../modal/modal-delete-user/modal-delete-user.component';
 
 @Component({
     selector: 'app-empleados',
     standalone: true,
-    imports: [ModalDataUserComponent],
+    imports: [ModalDataUserComponent, ModalDeleteUserComponent],
     templateUrl: './empleados.component.html',
     styleUrl: './empleados.component.scss'
 })
@@ -49,28 +50,41 @@ export class EmpleadosComponent implements OnInit {
     apellidoPrimero: string | null = ""
     apellidoSegundo: string | null = ""
     numeroIdentificacion: string | null = ""
-
+    pais: string | null = ""
+    identificacion: string | null = ""
+    area: string | null = ""
     public viewDialog(title: string, isCreate: boolean) {
         this.isCreate = isCreate;
         this.activeModalDataUser = true;
         this.title = title;
         this.nombres = ""
         this.apellidoPrimero = "";
-        this.apellidoSegundo = ""
+        this.apellidoSegundo = "";
     }
 
     public update(title: string, isCreate: boolean, empleado: Empleado) {
         this.isCreate = isCreate;
         this.activeModalDataUser = true;
         this.title = title;
-        this.nombres = empleado.nombres
+        this.nombres = empleado.nombres;
         this.apellidoPrimero = empleado.primerApellido;
-        this.apellidoSegundo = empleado.segundoApellido
-        this.numeroIdentificacion = empleado.numeroIdentificacion
+        this.apellidoSegundo = empleado.segundoApellido;
+        this.numeroIdentificacion = empleado.numeroIdentificacion;
+        this.pais = empleado.pais;
+        this.identificacion = empleado.identificacion
+        this.area = empleado.area
     }
 
     public cerrarModal(isActive: boolean) {
         this.activeModalDataUser = isActive;
+    }
+
+    public cerrarModalDelete(numeroIdentificacion: string) {
+        this.activeModalDeleteUser = false;
+        if (numeroIdentificacion != "") {
+            this.empleados = this.empleados.filter(empleado => empleado.numeroIdentificacion != numeroIdentificacion)
+            this.empleadosMostrar.empleados = this.empleados.slice(this.empleadosMostrar.inicio, this.empleadosMostrar.fin);
+        }
     }
 
     public registrarSalida(empleado: Empleado) {
@@ -79,6 +93,11 @@ export class EmpleadosComponent implements OnInit {
 
     public registrarIngreso(empleado: Empleado) {
         this.empleadoService.registrarEntrada(empleado.numeroIdentificacion || '');
+    }
+    activeModalDeleteUser = false;
+    public eliminarEmpleado(empleado: Empleado) {
+        this.activeModalDeleteUser = true;
+        this.numeroIdentificacion = empleado.numeroIdentificacion || ''
     }
 
     actualizarTabla() {

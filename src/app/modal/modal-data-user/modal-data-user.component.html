@@ -32,14 +32,23 @@
             <label for="frm-numeroIdentificación">Número de Identificación:</label>
             <input type="text" formControlName="numeroIdentificacion" id="frm-numeroIdentificación"
                 placeholder="Escribe numero de identificación máximo 20 cáracteres">
-            @if (!create) {
             <label for="frm-dominio">Dominio:</label>
             <select formControlName="dominio" id="frm-dominio">
                 <option value="">Escoje un Dominio</option>
                 <option value="USA">global.com.us</option>
                 <option value="COLOMBIA">global.com.co</option>
             </select>
-            }
+            <label for="frm-dominio">Area:</label>
+            <select formControlName="area" id="frm-area">
+                <option value="">Escoje un Area</option>
+                <option value="ADMINISTRACION">Administración</option>
+                <option value="FINANCIERA">Financiera</option>
+                <option value="COMPRAS">Compras</option>
+                <option value="INFRAESTRUCTURA">Infraestructura</option>
+                <option value="OPERACION">Operación</option>
+                <option value="TALENTO_HUMANO">Talento Humano</option>
+                <option value="SERVICIO_VARIOS">Servicio Varios</option>
+            </select>
             <div class="options">
                 <input type="submit" value="Enviar Datos" [disabled]="!profileForm.valid">
                 <button class="btn-salida" type="button" (click)="salir()">Volver</button>

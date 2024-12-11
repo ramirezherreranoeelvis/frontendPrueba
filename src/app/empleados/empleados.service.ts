@@ -43,7 +43,23 @@ export class EmpleadosService {
                                 }
                         })
         }
-
+        public eliminarEmpleado(codigoIdentificacion: string) {
+                const params = new HttpParams()
+                        .set('numeroIdentificacion', codigoIdentificacion)
+                this.httpCLient.delete<string>(this.urlParent + '/delete', { params })
+                        .subscribe({
+                                next: (response) => {
+                                        console.log(response);
+                                        
+                                        alert('Se elimino al Empleado Correctamente');
+                                },
+                                error: (error) => {
+                                        console.log(error);
+                                        
+                                        alert(error.error)
+                                }
+                        })
+        }
         public registrarSalida(codigoIdentificacion: string) {
                 const params = new HttpParams()
                         .set('numeroIdentificacion', codigoIdentificacion)

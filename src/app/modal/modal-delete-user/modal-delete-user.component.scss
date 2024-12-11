@@ -1,0 +1,58 @@
+.modal-data {
+        position: fixed;
+        left: 0;
+        background-color: #5050506c;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        display: flex;
+
+
+        .content {
+                background-color: #fff;
+                margin: auto;
+                min-width: 250px;
+                width: 50%;
+                border: none;
+                padding: 15px 15px 10px 15px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px 0px #0000004d;
+
+                label {
+                        display: block;
+                        text-align: center;
+                        width: 100%;
+                        font-size: 17px;
+                }
+
+                .options {
+                        display: flex;
+                        justify-content: center;
+                        gap: 30px;
+                }
+
+                button {
+                        border: none;
+                        padding: 10px 0;
+                        transition: .2s;
+                        cursor: pointer;
+                        margin: 20px 0;
+                        width: 100px;
+                        border-radius: 5px;
+
+                        &:hover {
+                                background: #6199ff;
+                        }
+                }
+
+                .delete {
+                        background-color: #ff1313;
+
+                        &:hover {
+                                background: #ff7171;
+                        }
+                }
+
+        }
+
+}
