@@ -2,26 +2,30 @@
     <div class="content">
         <label class="title-form">{{title}}</label>
         <form [formGroup]="profileForm" (ngSubmit)="enviarDatos()">
-            <label for="frm-nombres">Nombres:</label>
-            <input type="text" formControlName="nombres" id="frm-nombres" placeholder="Escribe los nombres">
+            <label for="frm-identificationNumber">Número de Identificación:</label>
+            <input type="text" formControlName="identificationNumber" id="frm-identificationNumber"
+                placeholder="Escribe numero de identificación máximo 20 cáracteres">
 
-            <label for="frm-apellido1">Primer Apellido:</label>
-            <input type="text" formControlName="primerApellido" id="frm-nombres"
+            <label for="frm-names">Nombres:</label>
+            <input type="text" formControlName="names" id="frm-names" placeholder="Escribe los nombres">
+
+            <label for="frm-firstSurname">Primer Apellido:</label>
+            <input type="text" formControlName="firstSurname" id="frm-firstSurname"
                 placeholder="Escribe el primer apellido">
 
-            <label for="frm-apellido2">Segundo Apellido:</label>
-            <input type="text" formControlName="segundoApellido" id="frm-nombres"
+            <label for="frm-secondSurname">Segundo Apellido:</label>
+            <input type="text" formControlName="secondSurname" id="frm-secondSurname"
                 placeholder="Escribe el segundo Apellido">
 
-            <label for=" frm-pais">País:</label>
-            <select formControlName="pais" id="frm-pais">
+            <label for=" frm-country">País:</label>
+            <select formControlName="country" id="frm-country">
                 <option value="">Escoje un País</option>
                 <option value="USA">Usa</option>
                 <option value="COLOMBIA">Colombia</option>
             </select>
 
-            <label for=" frm-identificacion">Tipo de Identificación:</label>
-            <select formControlName="identificacion" id="frm-identificacion">
+            <label for=" frm-identification">Tipo de Identificación:</label>
+            <select formControlName="identification" id="frm-identification">
                 <option value="">Escoje una Identificación</option>
                 <option value="CEDULA_DE_CIUDADANIA">cedula de ciudadania</option>
                 <option value="CEDULA_EXTRANJERA">cedula extranjera</option>
@@ -29,17 +33,14 @@
                 <option value="PERMISO_ESPECIAL">permiso especial</option>
             </select>
 
-            <label for="frm-numeroIdentificación">Número de Identificación:</label>
-            <input type="text" formControlName="numeroIdentificacion" id="frm-numeroIdentificación"
-                placeholder="Escribe numero de identificación máximo 20 cáracteres">
-            <label for="frm-dominio">Dominio:</label>
-            <select formControlName="dominio" id="frm-dominio">
+            <label for="frm-domain">Dominio:</label>
+            <select formControlName="domain" id="frm-domain">
                 <option value="">Escoje un Dominio</option>
                 <option value="USA">global.com.us</option>
                 <option value="COLOMBIA">global.com.co</option>
             </select>
-            <label for="frm-dominio">Area:</label>
-            <select formControlName="area" id="frm-area">
+            <label for="frm-department">Area:</label>
+            <select formControlName="department" id="frm-department">
                 <option value="">Escoje un Area</option>
                 <option value="ADMINISTRACION">Administración</option>
                 <option value="FINANCIERA">Financiera</option>

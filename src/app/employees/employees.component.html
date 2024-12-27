@@ -1,0 +1,65 @@
+<section id="app-employees">
+    <table class="list-employees">
+        <caption>Empleados</caption>
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Número de Identificación</th>
+                <th>Nombres</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Email</th>
+                <th>País</th>
+                <th>Tipo de Identificación</th>
+                <th>Dominio</th>
+                <th>Area</th>
+                <th class="employee-option">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (empleado of employeesToShow.employees; track $index) {
+                @let identificationNumber = empleado.identificationNumber;
+                <tr style="height: 30px; border: none;"></tr>
+                <tr>
+                    <td>{{employeesToShow.start + 1 + $index}}</td>
+                    <td>{{empleado.identificationNumber}}</td>
+                    <td>{{empleado.names}}</td>
+                    <td>{{empleado.firstSurname}}</td>
+                    <td>{{empleado.secondSurname}}</td>
+                    <td>{{empleado.email}}</td>
+                    <td>{{empleado.country}}</td>
+                    <td>{{empleado.identification}}</td>
+                    <td>{{empleado.domain}}</td>
+                    <td>{{empleado.department}}</td>
+                    <td class="employee-option">
+                        <div class="employee-options">
+                            <button class="btn-update" (click)="btnUpdateEmployeeClick(empleado, identificationNumber)">Actualizar</button>
+                            <button class="btn-entry" (click)="btnRegisterEntryClick(identificationNumber)">Ingreso</button>
+                            <button class="btn-exit" (click)="btnRegisterExitClick(identificationNumber)">Salida</button>
+                            <button class="btn-delete" (click)="btnDeleteEmployeeClick(identificationNumber)" >Eliminar</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="options">
+        <button class="btn-previous" (click)="btnPreviousClick()" [disabled]="employeesToShow.start === 0">Anterior</button>
+        <button class="btn-next" (click)="btnNextClick()" [disabled]="employeesToShow.end >= employees.length">Siguiente</button>
+    </div>
+    <button id="btn-new-employee" (click)="btnCreateEmployeeClick()">Nuevo Empleado</button>
+    @if (activeModalDataUser) {
+        <app-modal-data-user 
+            [title]="title"
+            [create]="isCreate" 
+            [employee]="employeeData"
+            [identificationNumberUpdate]="identificationNumberUpdate"
+            (finalizarEsto)="closeCreateUpdateModal()"
+        />
+    }
+    @if (activeModalDeleteUser) {
+        <app-modal-delete-user [numeroIdentificacion]="employeeData!.identificationNumber"
+            (finalizarEsto)="closeDeleteModal()" />
+    }
+
+</section>

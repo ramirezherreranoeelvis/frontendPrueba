@@ -1,3 +1,6 @@
+$backgroundColor: #080A17;
+$font-color: #fff;
+
 .modal-data {
         position: fixed;
         left: 0;
@@ -9,7 +12,8 @@
 
 
         .content {
-                background-color: #fff;
+                background-color: $backgroundColor;
+                color: $font-color;
                 margin: auto;
                 min-width: 250px;
                 width: 50%;

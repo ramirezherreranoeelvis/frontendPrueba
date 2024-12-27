@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { EmpleadosService } from '../../empleados/empleados.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { EmployeeService } from '../../employees/employees.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
       selector: 'app-modal-delete-user',
@@ -9,26 +9,25 @@ import { FormControl, FormGroup } from '@angular/forms';
       templateUrl: './modal-delete-user.component.html',
       styleUrl: './modal-delete-user.component.scss'
 })
-export class ModalDeleteUserComponent implements OnInit {
+export class ModalDeleteUserComponent {
 
       @Input() numeroIdentificacion!: string;
-      @Output() finalizado = new EventEmitter<string>();
-      profileForm = new FormGroup({
-            numeroIdentificacion: new FormControl(''),
-      })
+      @Output() finalizarEsto = new EventEmitter<void>();
 
-      constructor(private empleadoService: EmpleadosService) { }
+      constructor(private employeeService: EmployeeService) { }
 
-      ngOnInit(): void {
+      protected btnDeleteEmployeeClick = async () => {
+            try {
+                  const result = await firstValueFrom(this.employeeService.deleteEmployee(this.numeroIdentificacion));
+                  alert(result.message);
+                  this.finalizarEsto.emit();
+            } catch (error) {
+                  console.log(error);
+            }
       }
 
-      eliminarEmpleado() {
-            this.empleadoService.eliminarEmpleado(this.numeroIdentificacion);
-            this.finalizado.emit(this.numeroIdentificacion);
-      }
-
-      cerrarModal() {
-            this.finalizado.emit("");
+      protected btnCloseModalClick = () => {
+            this.finalizarEsto.emit();
       }
 
 }
